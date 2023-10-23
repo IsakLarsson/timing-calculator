@@ -7,7 +7,7 @@ function App() {
   useEffect(() => {
     let keyPressStartTime = 0;
 
-    const handleKeyDown = () => {
+    const handleKeyDown = (event: KeyboardEvent) => {
       if (keyPressStartTime === 0) {
         keyPressStartTime = Date.now();
       }
