@@ -3,13 +3,16 @@ import "./App.css";
 
 function App() {
   const [keyPressDuration, setKeyPressDuration] = useState(0);
+  // const [keyPresses, setkeyPresses] = useState<string[]>([]);
 
   useEffect(() => {
     let keyPressStartTime = 0;
 
-    const handleKeyDown = (event: KeyboardEvent) => {
+    const handleKeyDown = (/* event: KeyboardEvent */) => {
       if (keyPressStartTime === 0) {
         keyPressStartTime = Date.now();
+        // this breaks the thing for no reason
+        // setkeyPresses([...keyPresses, event.key]);
       }
     };
 
