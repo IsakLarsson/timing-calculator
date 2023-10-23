@@ -1,33 +1,35 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+import { useEffect, useState } from "react";
 import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [keyPressDuration, setKeyPressDuration] = useState(0);
+
+  useEffect(() => {
+    let keyPressStartTime = 0;
+
+    const handleKeyDown = () => {
+      if (keyPressStartTime === 0) {
+        keyPressStartTime = Date.now();
+      }
+    };
+
+    const handleKeyUp = () => {
+      const keyPressEndTime = Date.now();
+      setKeyPressDuration(keyPressEndTime - keyPressStartTime);
+      keyPressStartTime = 0;
+    };
+    document.addEventListener("keydown", handleKeyDown);
+    document.addEventListener("keyup", handleKeyUp);
+    return () => {
+      document.removeEventListener("keyup", handleKeyDown);
+      document.removeEventListener("keyup", handleKeyUp);
+    };
+  });
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <h2>Hold any key!</h2>
+      {keyPressDuration > 0 ? <h1>{keyPressDuration}ms</h1> : <h1>...</h1>}
     </>
   );
 }
