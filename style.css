@@ -5,7 +5,7 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.9);
-  background-color: #1b1f27;
+  background-color: #1d2d44;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -32,16 +32,16 @@ h1 {
   flex-direction: column;
   align-items: center;
   gap: 0.5rem;
-  border: 1px white;
 }
 
 #output {
   display: flex;
-  flex-direction: column-reverse;
+}
+#header {
+  max-width: 500px;
 }
 .keycap {
-  height: 40px;
-  width: 40px;
+  padding: 0.3rem 1rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -65,6 +65,7 @@ h1 {
   display: flex;
   flex-direction: row;
   align-items: center;
+  gap: 0.5rem;
 }
 
 .flex-col {
@@ -83,7 +84,11 @@ h2 {
 }
 
 #app {
+  max-height: 100vh;
   max-width: 1280px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
