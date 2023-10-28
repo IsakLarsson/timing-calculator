@@ -42,13 +42,22 @@ document.addEventListener("keyup", (event) => {
 });
 
 function updateOutput() {
+  let diff;
+  let lastTwoKeys = [];
   for (const key in keyPresses) {
-    const { duration } = keyPresses[key];
+    const { duration, startTime } = keyPresses[key];
     if (duration != 0) {
-      keytimes.push(duration);
+      keytimes.push({ key, startTime });
+      if (keytimes.length >= 2) {
+        lastTwoKeys = keytimes.slice(-2);
+        console.log(lastTwoKeys);
+        diff = lastTwoKeys[1].startTime - lastTwoKeys[0].startTime;
+      }
       document.getElementById(
         "output",
-      ).innerHTML += `<p>Key: ${key}, Duration: ${duration} ms</p>`;
+      ).innerHTML += `<p>Key: ${key}, Duration: ${duration} ms</p>  ${
+        diff ? "Time since last keypress: " + lastTwoKeys[0].key + diff : ""
+      }ms`;
     }
   }
 }
@@ -56,9 +65,13 @@ function updateOutput() {
 document.querySelector("#app").innerHTML = `
   <div>
     <div>
-      <h3>Hold any key!</h1>
+      <h3>Press any keys!</h1>
     </div>
-    <div id="output"></div> 
+    <div id="output">
+      <div >
+        Title
+      </div>
+    </div> 
     <div class="result">
       <h1 id="milliseconds">...</h2>
     </div>
