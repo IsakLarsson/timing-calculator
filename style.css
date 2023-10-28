@@ -27,30 +27,66 @@ h1 {
   line-height: 1.1;
 }
 
+.result-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px white;
+}
+
+#output {
+  display: flex;
+  flex-direction: column-reverse;
+}
+.keycap {
+  height: 40px;
+  width: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid black;
+  box-shadow: 2px 2px black;
+  font-weight: 600;
+  white-space: nowrap;
+  background: #fbfbfb;
+  color: #1b1f27;
+}
+
+.keycap h2 {
+  margin: 0;
+}
+
+.duration {
+  font-weight: 600;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.flex-row h3,
+h2 {
+  margin: 0;
+}
+.flex-col h3,
+h2 {
+  margin: 0;
+}
+
 #app {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #26354b;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
 }
 
 @media (prefers-color-scheme: light) {

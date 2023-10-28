@@ -1,23 +1,5 @@
 import "./style.css";
 
-let keyPressStartTime = 0;
-let keyPressEndTime = 0;
-let keyPressDuration = 0;
-
-/* document.addEventListener("keydown", () => {
-  console.log(keyPressStartTime);
-  if (keyPressStartTime === 0) {
-    keyPressStartTime = Date.now();
-  }
-});
-
-document.addEventListener("keyup", () => {
-  keyPressEndTime = Date.now();
-  keyPressDuration = keyPressEndTime - keyPressStartTime;
-  document.getElementById("milliseconds").innerHTML = `${keyPressDuration}ms`;
-  keyPressStartTime = 0;
-}); */
-
 const keyPresses = {};
 const keytimes = [];
 
@@ -29,8 +11,12 @@ document.addEventListener("keydown", (event) => {
       duration: 0,
     };
   }
+  // clearOutput();
 });
 
+function clearOutput() {
+  document.getElementById("output").innerHTML = `<div></div>`;
+}
 document.addEventListener("keyup", (event) => {
   const key = event.key;
   if (keyPresses[key]) {
@@ -53,11 +39,18 @@ function updateOutput() {
         console.log(lastTwoKeys);
         diff = lastTwoKeys[1].startTime - lastTwoKeys[0].startTime;
       }
-      document.getElementById(
-        "output",
-      ).innerHTML += `<p>Key: ${key}, Duration: ${duration} ms</p>  ${
-        diff ? "Time since last keypress: " + lastTwoKeys[0].key + diff : ""
-      }ms`;
+      document.getElementById("output").innerHTML += `
+      <div class="result-box">
+        <div class="keycap">
+          <h2>${key}</h2>
+        </div>
+        <div class="flex-row">
+          <h2 class="duration">${duration}</h2>
+          ${diff ? `<h3>Time since last key ${diff}</h3>` : ""}
+        </div>
+      </div>
+    </div> 
+`;
     }
   }
 }
@@ -65,13 +58,19 @@ function updateOutput() {
 document.querySelector("#app").innerHTML = `
   <div>
     <div>
-      <h3>Press any keys!</h1>
+      <h3>Press any keys!</h3>
     </div>
     <div id="output">
-      <div >
-        Title
+      <!-- <div class="result-box">
+        <div class="keycap">
+          <h2>a</h2>
+        </div>
+        <div class="flex-row">
+          <h2 class="duration">143ms</h2>
+          <h3>Time since last key</h3>
+        </div>
       </div>
-    </div> 
+    </div>  -->
     <div class="result">
       <h1 id="milliseconds">...</h2>
     </div>
