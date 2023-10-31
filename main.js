@@ -28,18 +28,25 @@ function clearOutput() {
   document.getElementById("output").innerHTML = `<div></div>`;
 }
 
-function updateOutput() {
-  document.getElementById("header").innerHTML = "";
+function calculateDiff(key1, key2) {
+  lastTwoKeys = keyHistory.slice(-2);
+  diff = lastTwoKeys[1].startTime - lastTwoKeys[0].startTime;
+}
+
+function calculateTime() {
   for (const key in keyPresses) {
     const { duration, startTime } = keyPresses[key];
     if (duration != 0) {
       keyHistory.push({ key, startTime, duration });
       if (keyHistory.length >= 2) {
-        lastTwoKeys = keyHistory.slice(-2);
-        diff = lastTwoKeys[1].startTime - lastTwoKeys[0].startTime;
+        calculateDiff();
       }
     }
   }
+}
+function updateOutput() {
+  document.getElementById("header").innerHTML = "";
+  calculateTime();
   clearOutput();
 
   if (lastTwoKeys.length >= 2) {
